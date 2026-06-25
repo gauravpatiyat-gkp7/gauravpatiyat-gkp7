@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://gauravpatiyat-gkp7.github.io/gauravpatiyat-gkp7/sitemap.xml
+Sitemap: https://codenull.in/sitemap.xml
