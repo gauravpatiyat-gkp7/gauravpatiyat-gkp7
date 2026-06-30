@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{CODE.NULL} intro splash — preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#0B1F38;--teal:#0F9E8C;--teal-bright:#2DD4BF;--mist:#F2F6F9;--muted:#5B6B7F;--display:'Space Grotesk',system-ui,sans-serif;--mono:'IBM Plex Mono',monospace}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--display);background:var(--mist);min-height:100vh}
+  /* mock landing behind the splash */
+  .landing{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center;padding:24px}
+  .landing .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.3rem;color:var(--ink)}
+  .landing .logo .sq{width:11px;height:11px;border-radius:2px;background:var(--teal-bright);box-shadow:0 0 0 3px rgba(45,212,191,.18)}
+  .landing h1{font-size:clamp(1.6rem,5vw,2.6rem);color:var(--ink)}
+  .landing p{color:var(--muted);font-family:var(--mono);font-size:.85rem}
+  button{font-family:var(--display);font-weight:600;color:#fff;background:var(--ink);border:0;border-radius:9px;padding:11px 20px;cursor:pointer}
+
+  /* ===== the actual splash (same CSS as the live homepage) ===== */
+  @keyframes cnType{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 -2px 0 0)}}
+  @keyframes cnPrime{0%,100%{opacity:1}50%{opacity:.2}}
+  #splash{position:fixed;inset:0;z-index:9999;background:#fff;display:flex;align-items:center;justify-content:center;animation:cnSplashOut 2.6s ease forwards}
+  #splash .splash-logo{font-family:var(--display);font-weight:700;color:var(--ink);letter-spacing:-.01em;display:flex;align-items:center;gap:16px;font-size:clamp(2rem,6vw,3.2rem)}
+  #splash .splash-logo .dot{width:18px;height:18px;border-radius:4px;background:var(--teal-bright);box-shadow:0 0 0 5px rgba(45,212,191,.18);animation:cnPrime .24s ease 2 both}
+  #splash .splash-logo .brandtext{display:inline-block;white-space:nowrap;clip-path:inset(0 100% 0 0);animation:cnType .8s steps(12,end) .45s both}
+  @keyframes cnSplashOut{0%,72%{opacity:1;visibility:visible}96%{opacity:0;visibility:visible}100%{opacity:0;visibility:hidden;pointer-events:none}}
+  @media (prefers-reduced-motion:reduce){#splash{display:none}}
+  .replaying#splash{animation:none;opacity:1;visibility:visible}
+</style>
+</head>
+<body>
+  <div id="splash" aria-hidden="true"><div class="splash-logo"><span class="dot"></span><span class="brandtext">{CODE.NULL}</span></div></div>
+  <div class="landing">
+    <div class="logo"><span class="sq"></span>{CODE.NULL}</div>
+    <h1>This is your landing page</h1>
+    <p>// the splash faded away — content is now interactive</p>
+    <button id="replay">Replay splash</button>
+  </div>
+  <script>
+    // preview-only: NOT added to your live site (which stays JS-free)
+    var s=document.getElementById('splash');
+    document.getElementById('replay').addEventListener('click',function(){
+      s.classList.add('replaying'); void s.offsetWidth; s.classList.remove('replaying');
+    });
+  </script>
+</body>
+</html>

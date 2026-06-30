@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{CODE.NULL} logo animation — preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#0B1F38;--teal-bright:#2DD4BF;--display:'Space Grotesk',system-ui,sans-serif}
+  body{margin:0;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;background:#F2F6F9;font-family:var(--display)}
+  .bar{background:#fff;border:1px solid #e3eaf0;border-radius:12px;padding:18px 26px;box-shadow:0 6px 24px rgba(11,31,56,.06)}
+  /* same markup + same animation as the live site */
+  .monogram{font-family:var(--display);font-weight:700;font-size:1.4rem;letter-spacing:-.01em;color:var(--ink);display:flex;align-items:center;gap:11px;text-decoration:none}
+  .dot{width:12px;height:12px;border-radius:2px;background:var(--teal-bright);box-shadow:0 0 0 3px rgba(45,212,191,.18)}
+  @keyframes cnType{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 -2px 0 0)}}
+  @keyframes cnPrime{0%,100%{opacity:1}50%{opacity:.2}}
+  .monogram .brandtext{display:inline-block;white-space:nowrap;clip-path:inset(0 100% 0 0);animation:cnType .7s steps(12,end) .4s both}
+  .monogram .dot{animation:cnPrime .22s ease 2 both}
+  @media (prefers-reduced-motion:reduce){.monogram .brandtext{animation:none;clip-path:none}.monogram .dot{animation:none}}
+  /* replay: re-add the class to restart the CSS animation */
+  .replaying .brandtext{animation:none;clip-path:inset(0 100% 0 0)}
+  .replaying .dot{animation:none}
+  button{font-family:var(--display);font-weight:600;font-size:.95rem;color:#fff;background:var(--ink);border:0;border-radius:9px;padding:11px 20px;cursor:pointer}
+  p{color:#5b6b7b;font-weight:500;margin:0;font-size:.9rem}
+</style>
+</head>
+<body>
+  <div class="bar"><a class="monogram" href="#" id="logo"><span class="dot"></span><span class="brandtext">{CODE.NULL}</span></a></div>
+  <button id="replay">Replay animation</button>
+  <p>This is exactly the effect now on your homepage + UI/UX page. It fires on every page load.</p>
+  <script>
+    // (preview-only helper — NOT added to your live site, which stays JS-free)
+    var logo=document.getElementById('logo');
+    document.getElementById('replay').addEventListener('click',function(){
+      logo.classList.add('replaying');
+      void logo.offsetWidth;            // force reflow
+      logo.classList.remove('replaying');
+    });
+  </script>
+</body>
+</html>
